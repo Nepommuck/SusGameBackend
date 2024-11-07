@@ -171,6 +171,7 @@ fun Route.gameRouting() {
                                             game.gameStatus = GameStatus.RUNNING
                                             game.gameGraph = Generator.getGraph(playerMap.values.toList())
                                             // sends game status updates to all players
+                                            game.gameStartTime = System.currentTimeMillis()
                                             launch {
                                                 while (game.gameStatus == GameStatus.RUNNING) {
                                                     val gameStateMessage: ServerSocketMessage =
@@ -190,9 +191,14 @@ fun Route.gameRouting() {
                                                     kotlinx.coroutines.delay(CLIENT_REFRESH_FREQUENCY)
                                                 }
                                             }
+
                                             val bfs = BFS(game.gameGraph, game.gameGraph.getServersList()[0])
                                             launch {
                                                 while (game.gameStatus == GameStatus.RUNNING) {
+
+                                                    if (game.endGame(game.gameGraph.getTotalPacketsDelivered())) {
+
+                                                    }
                                                     kotlinx.coroutines.delay(BFS_FREQUENCY)
                                                     game.addMoneyForAllPlayers()
                                                     bfs.run()

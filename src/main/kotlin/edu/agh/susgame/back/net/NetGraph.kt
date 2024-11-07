@@ -67,6 +67,10 @@ class NetGraph {
     fun getRoutersList() = routers.values.toList()
     fun getServersList() = servers.values.toList()
 
+    fun getTotalPacketsDelivered () : Int {
+        return servers.values.sumOf { it.getPacketsReceived() }
+    }
+
     /**
      * Connects two nodes in the graph with an edge.
      * Adds the edge to the edge HashSet.

@@ -7,13 +7,17 @@ import edu.agh.susgame.dto.rest.model.*
 import edu.agh.susgame.dto.socket.common.GameStatus
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger
+import edu.agh.susgame.config.*
 
 class Game(
     val name: String,
     val maxNumberOfPlayers: Int,
     val gamePin: String? = null,
     var gameStatus: GameStatus = GameStatus.WAITING,
+    var gameGoal: Int = DEFAULT_GAME_GOAL,
+    var gameTime: Int = DEFAULT_GAME_TIME,
     var gameGraph: NetGraph = NetGraph(),
+    var gameStartTime: Long = -1,
 ) {
     companion object {
         val lastId = AtomicInteger(0)
@@ -51,6 +55,18 @@ class Game(
 
     fun addMoneyForAllPlayers() {
         playerMap.values.forEach { it.addMoney() }
+    }
+
+    fun endGame(packetsDelivered: Int): Boolean {
+        if (packetsDelivered >= gameGoal) {
+            gameStatus = GameStatus.FINISHED
+            return true
+        }
+        if (gameTime <= 0) {
+            gameStatus = GameStatus.FINISHED
+            return true
+        }
+        return true
     }
 }
 

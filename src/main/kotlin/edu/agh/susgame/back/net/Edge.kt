@@ -2,7 +2,6 @@ package edu.agh.susgame.back.net
 
 import edu.agh.susgame.dto.socket.server.EdgeDTO
 import edu.agh.susgame.config.*
-import kotlin.math.ceil
 
 /**
  * Represents an edge in a graph.

@@ -24,3 +24,6 @@ fun nextEdgeWeight(weight: Int) = weight + ceil(EDGE_UPGRADE_WEIGHT_COEFF * weig
 const val PLAYER_BASE_MONEY = 0
 const val PLAYER_MAX_PACKETS_PER_TICK = 20
 const val PLAYER_DEFAULT_PACKETS_PER_TICK = 5
+
+const val DEFAULT_GAME_GOAL = 1000
+const val DEFAULT_GAME_TIME = 600 //in seconds
