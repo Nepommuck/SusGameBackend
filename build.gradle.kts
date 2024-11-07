@@ -30,7 +30,7 @@ dependencies {
     implementation("com.michael-bull.kotlin-result:kotlin-result:$result_version")
 
     implementation("io.ktor:ktor-server-core-jvm")
-    implementation("io.ktor:ktor-server-content-negotiation-jvm")
+    implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm")
     implementation("io.ktor:ktor-server-websockets-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
@@ -39,8 +39,7 @@ dependencies {
     implementation("io.ktor:ktor-server-status-pages:$ktor_version")
     implementation("io.ktor:ktor-server-request-validation:$ktor_version")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$cbor_version")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-cbor:$cbor_version")
+    implementation("io.ktor:ktor-serialization-kotlinx-cbor:$ktor_version")
 
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
