@@ -1,7 +1,7 @@
-package edu.agh.susgame.back.net.node
+package edu.agh.susgame.back.domain.net.node
 
-import edu.agh.susgame.back.net.Edge
-import edu.agh.susgame.back.net.Packet
+import edu.agh.susgame.back.domain.net.Edge
+import edu.agh.susgame.back.domain.net.Packet
 import edu.agh.susgame.dto.rest.model.Coordinates
 
 

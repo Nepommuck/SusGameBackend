@@ -1,7 +1,7 @@
 package parsing_test
 
-import edu.agh.susgame.back.net.Player
-import edu.agh.susgame.back.net.parser.GraphParser
+import edu.agh.susgame.back.domain.net.Player
+import edu.agh.susgame.back.domain.net.build.GraphParser
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

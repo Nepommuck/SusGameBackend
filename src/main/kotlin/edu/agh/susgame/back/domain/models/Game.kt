@@ -1,11 +1,11 @@
-package edu.agh.susgame.back.models
+package edu.agh.susgame.back.domain.models
 
-import edu.agh.susgame.back.net.BFS
-import edu.agh.susgame.back.net.Generator
-import edu.agh.susgame.back.net.NetGraph
-import edu.agh.susgame.back.net.Player
-import edu.agh.susgame.back.rest.games.RestParser
-import edu.agh.susgame.back.socket.GamesWebSocketConnection
+import edu.agh.susgame.back.domain.net.BFS
+import edu.agh.susgame.back.domain.net.NetGraph
+import edu.agh.susgame.back.domain.net.Player
+import edu.agh.susgame.back.domain.net.build.Generator
+import edu.agh.susgame.back.services.rest.RestParser
+import edu.agh.susgame.back.services.socket.GamesWebSocketConnection
 import edu.agh.susgame.config.*
 import edu.agh.susgame.dto.rest.model.Lobby
 import edu.agh.susgame.dto.rest.model.LobbyId

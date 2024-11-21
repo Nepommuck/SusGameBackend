@@ -1,4 +1,4 @@
-package edu.agh.susgame.back.net
+package edu.agh.susgame.back.domain.net
 
 import edu.agh.susgame.config.EDGE_DEFAULT_UPGRADE_COST
 import edu.agh.susgame.config.nextEdgeUpgradeCost

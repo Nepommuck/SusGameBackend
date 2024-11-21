@@ -1,6 +1,6 @@
-package edu.agh.susgame.back.rest.games
+package edu.agh.susgame.back.services.rest
 
-import edu.agh.susgame.back.models.Game
+import edu.agh.susgame.back.domain.models.Game
 import edu.agh.susgame.dto.rest.games.GamesRest
 import edu.agh.susgame.dto.rest.games.model.CreateGameApiResult
 import edu.agh.susgame.dto.rest.games.model.GetAllGamesApiResult

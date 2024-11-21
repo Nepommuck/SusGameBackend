@@ -1,7 +1,7 @@
 package gameplay
 
-import edu.agh.susgame.back.net.Player
-import edu.agh.susgame.back.net.parser.GraphParser
+import edu.agh.susgame.back.domain.net.Player
+import edu.agh.susgame.back.domain.net.build.GraphParser
 import edu.agh.susgame.config.*
 import org.junit.Test
 import kotlin.math.ceil

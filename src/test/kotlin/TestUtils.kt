@@ -1,10 +1,10 @@
 package net_test
 
-import edu.agh.susgame.back.net.Edge
-import edu.agh.susgame.back.net.Player
-import edu.agh.susgame.back.net.node.Host
-import edu.agh.susgame.back.net.node.Router
-import edu.agh.susgame.back.net.node.Server
+import edu.agh.susgame.back.domain.net.Edge
+import edu.agh.susgame.back.domain.net.Player
+import edu.agh.susgame.back.domain.net.node.Host
+import edu.agh.susgame.back.domain.net.node.Router
+import edu.agh.susgame.back.domain.net.node.Server
 
 interface TestUtils {
     fun newTestHost(id: Int, player: Player): Host = Host(

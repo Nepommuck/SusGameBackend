@@ -1,8 +1,8 @@
 package edu.agh.susgame.back
 
-import edu.agh.susgame.back.plugins.configureRouting
-import edu.agh.susgame.back.plugins.configureSerialization
-import edu.agh.susgame.back.rest.games.HttpErrorResponseBody
+import edu.agh.susgame.back.presentation.HttpErrorResponseBody
+import edu.agh.susgame.back.services.plugins.configureRouting
+import edu.agh.susgame.back.services.plugins.configureSerialization
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.statuspages.*

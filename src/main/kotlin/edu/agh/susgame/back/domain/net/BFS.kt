@@ -1,7 +1,7 @@
-package edu.agh.susgame.back.net
+package edu.agh.susgame.back.domain.net
 
-import edu.agh.susgame.back.net.node.Node
-import edu.agh.susgame.back.net.node.Receiving
+import edu.agh.susgame.back.domain.net.node.Node
+import edu.agh.susgame.back.domain.net.node.Receiving
 
 
 /**

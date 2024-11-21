@@ -1,6 +1,6 @@
-package edu.agh.susgame.back.plugins
+package edu.agh.susgame.back.services.plugins
 
-import edu.agh.susgame.back.rest.games.gameRouting
+import edu.agh.susgame.back.presentation.gameRouting
 import io.ktor.server.application.*
 import io.ktor.server.plugins.openapi.*
 import io.ktor.server.plugins.swagger.*

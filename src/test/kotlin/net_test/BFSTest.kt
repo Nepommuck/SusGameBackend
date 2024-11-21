@@ -1,9 +1,9 @@
 package net_test
 
-import edu.agh.susgame.back.net.BFS
-import edu.agh.susgame.back.net.NetGraph
-import edu.agh.susgame.back.net.Packet
-import edu.agh.susgame.back.net.Player
+import edu.agh.susgame.back.domain.net.BFS
+import edu.agh.susgame.back.domain.net.NetGraph
+import edu.agh.susgame.back.domain.net.Packet
+import edu.agh.susgame.back.domain.net.Player
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

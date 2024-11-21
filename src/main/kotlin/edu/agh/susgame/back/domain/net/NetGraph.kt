@@ -1,9 +1,9 @@
-package edu.agh.susgame.back.net
+package edu.agh.susgame.back.domain.net
 
-import edu.agh.susgame.back.net.node.Host
-import edu.agh.susgame.back.net.node.Node
-import edu.agh.susgame.back.net.node.Router
-import edu.agh.susgame.back.net.node.Server
+import edu.agh.susgame.back.domain.net.node.Host
+import edu.agh.susgame.back.domain.net.node.Node
+import edu.agh.susgame.back.domain.net.node.Router
+import edu.agh.susgame.back.domain.net.node.Server
 
 /**
  * Represents the structure of the net as an undirected graph

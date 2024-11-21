@@ -1,4 +1,4 @@
-package edu.agh.susgame.back.socket
+package edu.agh.susgame.back.services.socket
 
 import edu.agh.susgame.dto.socket.ServerSocketMessage
 import io.ktor.websocket.*

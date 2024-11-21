@@ -1,6 +1,7 @@
-package edu.agh.susgame.back.net
+package edu.agh.susgame.back.domain.net.build
 
-import edu.agh.susgame.back.net.parser.GraphParser
+import edu.agh.susgame.back.domain.net.NetGraph
+import edu.agh.susgame.back.domain.net.Player
 import java.io.File
 import kotlin.random.Random
 

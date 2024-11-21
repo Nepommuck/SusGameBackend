@@ -1,12 +1,12 @@
-package edu.agh.susgame.back.net.parser
+package edu.agh.susgame.back.domain.net.build
 
-import edu.agh.susgame.back.net.Edge
-import edu.agh.susgame.back.net.NetGraph
-import edu.agh.susgame.back.net.Player
-import edu.agh.susgame.back.net.node.Host
-import edu.agh.susgame.back.net.node.Node
-import edu.agh.susgame.back.net.node.Router
-import edu.agh.susgame.back.net.node.Server
+import edu.agh.susgame.back.domain.net.Edge
+import edu.agh.susgame.back.domain.net.NetGraph
+import edu.agh.susgame.back.domain.net.Player
+import edu.agh.susgame.back.domain.net.node.Host
+import edu.agh.susgame.back.domain.net.node.Node
+import edu.agh.susgame.back.domain.net.node.Router
+import edu.agh.susgame.back.domain.net.node.Server
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import java.io.File

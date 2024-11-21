@@ -1,6 +1,6 @@
 package edu.agh.susgame.config
 
-import edu.agh.susgame.back.models.QuizQuestion
+import edu.agh.susgame.back.domain.models.QuizQuestion
 
 val QuizQuestions = listOf(
     QuizQuestion(

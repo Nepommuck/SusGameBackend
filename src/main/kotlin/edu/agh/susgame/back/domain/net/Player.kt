@@ -1,4 +1,4 @@
-package edu.agh.susgame.back.net
+package edu.agh.susgame.back.domain.net
 
 import edu.agh.susgame.config.MONEY_GAINED_BY_CORRECT_ANSWER
 import edu.agh.susgame.config.MONEY_GAIN_PER_ITERATION

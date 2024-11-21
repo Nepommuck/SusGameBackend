@@ -1,4 +1,4 @@
-package edu.agh.susgame.back.plugins
+package edu.agh.susgame.back.services.plugins
 
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*

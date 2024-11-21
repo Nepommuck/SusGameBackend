@@ -1,8 +1,9 @@
-package edu.agh.susgame.back.rest.games
+package edu.agh.susgame.back.presentation
 
-import edu.agh.susgame.back.net.Player
-import edu.agh.susgame.back.rest.games.GamesRestImpl.DeleteGameResult
-import edu.agh.susgame.back.socket.GamesWebSocketConnection
+import edu.agh.susgame.back.domain.net.Player
+import edu.agh.susgame.back.services.rest.GamesRestImpl
+import edu.agh.susgame.back.services.rest.GamesRestImpl.DeleteGameResult
+import edu.agh.susgame.back.services.socket.GamesWebSocketConnection
 import edu.agh.susgame.dto.rest.games.model.*
 import edu.agh.susgame.dto.rest.model.LobbyId
 import edu.agh.susgame.dto.socket.ClientSocketMessage

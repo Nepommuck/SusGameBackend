@@ -1,4 +1,4 @@
-package edu.agh.susgame.back.models
+package edu.agh.susgame.back.domain.models
 
 data class QuizQuestion(
     val question: String,

@@ -1,12 +1,12 @@
 package net_test.parsing_test
 
-import edu.agh.susgame.back.net.Edge
-import edu.agh.susgame.back.net.NetGraph
-import edu.agh.susgame.back.net.Player
-import edu.agh.susgame.back.net.node.Host
-import edu.agh.susgame.back.net.node.Router
-import edu.agh.susgame.back.net.node.Server
-import edu.agh.susgame.back.rest.games.RestParser
+import edu.agh.susgame.back.domain.net.Edge
+import edu.agh.susgame.back.domain.net.NetGraph
+import edu.agh.susgame.back.domain.net.Player
+import edu.agh.susgame.back.domain.net.node.Host
+import edu.agh.susgame.back.domain.net.node.Router
+import edu.agh.susgame.back.domain.net.node.Server
+import edu.agh.susgame.back.services.rest.RestParser
 import edu.agh.susgame.dto.rest.model.Coordinates
 import net_test.TestUtils
 import org.junit.Test

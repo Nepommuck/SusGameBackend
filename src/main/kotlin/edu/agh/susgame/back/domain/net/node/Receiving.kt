@@ -1,6 +1,6 @@
-package edu.agh.susgame.back.net.node
+package edu.agh.susgame.back.domain.net.node
 
-import edu.agh.susgame.back.net.Packet
+import edu.agh.susgame.back.domain.net.Packet
 
 abstract class Receiving : Node() {
     // Pointer on last processed neighbour index for load balancing

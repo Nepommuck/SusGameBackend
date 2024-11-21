@@ -1,7 +1,7 @@
-package edu.agh.susgame.back.rest.games
+package edu.agh.susgame.back.services.rest
 
-import edu.agh.susgame.back.models.Game
-import edu.agh.susgame.back.net.NetGraph
+import edu.agh.susgame.back.domain.models.Game
+import edu.agh.susgame.back.domain.net.NetGraph
 import edu.agh.susgame.dto.rest.games.model.GetGameMapApiResult
 import edu.agh.susgame.dto.rest.model.GameMapEdgeDTO
 import edu.agh.susgame.dto.rest.model.GameMapNodeDTO
