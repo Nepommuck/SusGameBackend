@@ -27,6 +27,7 @@ object RestParser {
             GameMapHostDTO(
                 id = host.index,
                 coordinates = host.getCoordinates(),
+                playerId = host.getPlayer().index
             )
         },
         routers = netGraph.getRoutersList().map { router ->

@@ -19,6 +19,7 @@ class Host(
 
     private var numPacketsSent: Int = 0 // How many packets has the host already sent.
 
+    fun getPlayer(): Player = player
     fun getMaxPacketsPerTick(): Int = maxPacketsPerTick
     fun setMaxPacketsPerTick(packetsPerTick: Int) {
         if (packetsPerTick < 0) {

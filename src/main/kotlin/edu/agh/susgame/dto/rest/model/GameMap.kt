@@ -28,6 +28,7 @@ data class GameMapServerDTO(
 
 @Serializable
 data class GameMapHostDTO(
+    val playerId: Int,
     val id: Int,
     val coordinates: Coordinates,
 )

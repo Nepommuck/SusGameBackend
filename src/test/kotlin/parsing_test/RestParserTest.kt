@@ -59,7 +59,7 @@ class RestParserTest : TestUtils {
         val result = RestParser.netGraphToGetGameMapDTO(graph)
 
         assertEquals(result.hosts.size, 1)
-        assertContains(result.hosts, HostDTO(id = 0, coordinates = coordinates1))
+        assertContains(result.hosts, HostDTO(id = 0, coordinates = coordinates1, playerId = player0.index))
 
         assertEquals(result.routers.size, 2)
         assertContains(result.routers, RouterDTO(id = 1, coordinates = coordinates2, bufferSize = 5))
