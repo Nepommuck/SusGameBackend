@@ -166,7 +166,9 @@ class NetGraph {
     fun updateBuffers() {
         val nodes = getNodes()
 
-        nodes.forEach { node -> node.updateBuffer() }
+        nodes.forEach { node ->
+            node.updateBuffer()
+        }
     }
 
 }

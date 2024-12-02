@@ -3,10 +3,12 @@ package edu.agh.susgame.back.domain.net.node
 import edu.agh.susgame.back.domain.net.Edge
 import edu.agh.susgame.back.domain.net.Packet
 import edu.agh.susgame.back.domain.net.Player
+import edu.agh.susgame.config.CRITICAL_BUFFER_OVERHEAT_LEVEL
 import edu.agh.susgame.config.ROUTER_DEFAULT_UPGRADE_COST
 import edu.agh.susgame.config.nextRouterBufferSize
 import edu.agh.susgame.config.nextRouterUpgradeCost
 import edu.agh.susgame.dto.socket.server.RouterDTO
+import kotlin.math.min
 
 /**
  * Represents the router object. Extends Sending.
@@ -29,6 +31,12 @@ class Router(
     // cost of the next buffer capacity upgrade
     private var upgradeCost: Int = ROUTER_DEFAULT_UPGRADE_COST
 
+    // Variable defining if router is working. Changes, when the router is overheated.
+    private var isWorking: Boolean = true
+
+    // Defines how many iterations are left to reach router overflow level, what leads to overheat.
+    private var overheatLevel: Int = 0
+
     init {
         spaceLeft = bufferSize
     } // How much space is left in the whole buffer
@@ -48,6 +56,7 @@ class Router(
             buffer[node]?.addAll(inputQueue)
             inputQueue.clear()
         }
+        controlBufferOverheat()
     }
 
     /**
@@ -63,14 +72,13 @@ class Router(
     }
 
     /**
-     * Retrieves the first packet directed to the specified node.
+     * Retrieves the first packet directed to the specified node if this router is working.
      * Updates the `spaceLeft` variable if the packet is sent.
      *
      * @param node Neighbor to get the packet from.
      * @return The first packet from the queue.
      */
-    override fun getPacket(node: Node): Packet? = buffer[node]?.removeFirstOrNull()?.also { spaceLeft++ }
-
+    override fun getPacket(node: Node): Packet? = if (isWorking) buffer[node]?.removeFirstOrNull()?.also { spaceLeft++ } else null
 
     /**
      * Retrieves how much space is left in the router buffer
@@ -98,14 +106,10 @@ class Router(
         return packets
     }
 
-    fun toDTO(): RouterDTO {
-        return RouterDTO(
-            id = index,
-            bufferSize = bufferSize,
-            spaceLeft = spaceLeft,
-            upgradeCost = upgradeCost
-        )
-    }
+    /**
+     * Informs whether the buffer is not overheated.
+     */
+    fun isWorking(): Boolean = isWorking
 
     /**
      * Upgrades the buffer capacity and increases the upgrade cost.
@@ -120,4 +124,48 @@ class Router(
         bufferSize = nextBufferSize
         upgradeCost = nextRouterUpgradeCost(upgradeCost)
     }
+
+    /**
+     * Performs the action of fixing the buffer.
+     *  - All of the mappings in buffer are cleared.
+     *  - State changes to working.
+     *  - Level of overheat decreases to zero.
+     */
+    fun fixBuffer() {
+        clearBuffer()
+        isWorking = true
+        overheatLevel = 0
+    }
+
+    /**
+     * Performs the overheating operation:
+     *  - if the buffer is full, the overheat level starts incrementing.
+     *  - if the buffer is not full, the overheat level decrements to zero.
+     *  - if the overheat level reaches the criticalBufferOverflow level, the router stops working.
+     */
+    private fun controlBufferOverheat() {
+        if (spaceLeft == 0) overheatLevel++
+        else overheatLevel = min(overheatLevel--, 0)
+
+        if (overheatLevel >= CRITICAL_BUFFER_OVERHEAT_LEVEL) isWorking = false // Router stops working until it is fixed
+    }
+
+    fun toDTO(): RouterDTO {
+        return RouterDTO(
+            id = index,
+            bufferSize = bufferSize,
+            spaceLeft = spaceLeft,
+            upgradeCost = upgradeCost,
+            overheatLevel = overheatLevel,
+            isWorking = isWorking,
+        )
+    }
+
+    fun clearBuffer() {
+        buffer.clear()
+        spaceLeft = bufferSize
+    }
+
+    fun getOverheatLevel() = overheatLevel
+
 }

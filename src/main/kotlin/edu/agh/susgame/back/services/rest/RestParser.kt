@@ -2,6 +2,7 @@ package edu.agh.susgame.back.services.rest
 
 import edu.agh.susgame.back.domain.models.Game
 import edu.agh.susgame.back.domain.net.NetGraph
+import edu.agh.susgame.config.CRITICAL_BUFFER_OVERHEAT_LEVEL
 import edu.agh.susgame.dto.rest.model.*
 import edu.agh.susgame.dto.socket.ServerSocketMessage
 
@@ -45,5 +46,7 @@ object RestParser {
                 weight = edge.getWeight()
             )
         },
+        gameGoal = game.gameGoal,
+        criticalBufferOverheatLevel = CRITICAL_BUFFER_OVERHEAT_LEVEL
     )
 }

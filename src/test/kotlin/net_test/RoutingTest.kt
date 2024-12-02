@@ -2,8 +2,12 @@ package net_test
 
 import edu.agh.susgame.back.domain.net.NetGraph
 import edu.agh.susgame.back.domain.net.Player
+import edu.agh.susgame.back.domain.net.node.Router
+import edu.agh.susgame.config.CRITICAL_BUFFER_OVERHEAT_LEVEL
+import junit.framework.TestCase.assertTrue
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 
 class RoutingTest : TestUtils {
 
@@ -185,6 +189,91 @@ class RoutingTest : TestUtils {
         assertEquals(4, router4.getSpaceLeft())
         assertEquals(5, router3.getSpaceLeft())
         assertEquals(6, server5.getPacketsReceived())
+    }
+
+    fun mockRouterForOverflowTests(): Router {
+        val graph = NetGraph()
+
+        val host0 = newTestHost(0, player0)
+        val router1 = newTestRouter(1, 1)
+        val server2 = newTestServer(2)
+
+        val edge0 = newTestEdge(0, 1000)
+        val edge1 = newTestEdge(1, 1000)
+
+
+        graph.addNode(host0)
+        graph.addNode(router1)
+        graph.addNode(server2)
+
+        graph.addEdge(host0, router1, edge0)
+        graph.addEdge(router1, server2, edge1)
+
+        val nodeList0 = listOf(router1, server2)
+        host0.setRoute(nodeList0)
+
+        return router1
+    }
+
+    @Test
+    fun `is the router turned off after an overheat`() {
+        //Given
+        val router = mockRouterForOverflowTests()
+
+        // When
+        // CRITICAL_BUFFER_OVERHEAT_LEVEL iterations leading to buffer overflow
+        repeat(CRITICAL_BUFFER_OVERHEAT_LEVEL) {
+            router.collectPackets()
+            router.updateBuffer()
+        }
+
+        // Expect
+        assertFalse(router.isWorking())
+    }
+
+    @Test
+    fun `does the overflow level decrease when the buffer is not full`() {
+        // Given
+        val router = mockRouterForOverflowTests()
+
+        // When
+        // CRITICAL_BUFFER_OVERHEAT_LEVEL iterations leading to buffer overflow
+        repeat(CRITICAL_BUFFER_OVERHEAT_LEVEL / 2) {
+            router.collectPackets()
+            router.updateBuffer()
+        }
+
+        router.clearBuffer()
+
+        // Buffer is updated but the packets are not collected. The overheat level should be equal to 0.
+        repeat(CRITICAL_BUFFER_OVERHEAT_LEVEL) {
+            router.updateBuffer()
+        }
+
+        // Expect
+        assertTrue(router.isWorking())
+        assertEquals(router.getOverheatLevel(), 0)
+
+    }
+
+    @Test
+    fun `is the router fixed after an overheat`() {
+        //Given
+        val router = mockRouterForOverflowTests()
+
+        // When
+        // CRITICAL_BUFFER_OVERHEAT_LEVEL iterations leading to buffer overflow
+        repeat(CRITICAL_BUFFER_OVERHEAT_LEVEL) {
+            router.collectPackets()
+            router.updateBuffer()
+        }
+
+        router.fixBuffer()
+
+        // Expect
+        assertTrue(router.isWorking())
+        assertEquals(router.getOverheatLevel(), 0)
+        assertEquals(router.spaceLeft, router.getBufferSize())
     }
 }
 
