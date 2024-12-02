@@ -16,7 +16,7 @@ object RestParser {
         edges = game.netGraph.getEdges().map { it.toDTO() },
         players = game.getPlayers().toMap().values.map { it.toDTO() },
         gameStatus = game.getGameStatus(),
-        timeLeft = game.getTimeLeftInSeconds(),
+        remainingSeconds = game.getTimeLeftInSeconds(),
     )
 
     fun netGraphToGetGameMapDTO(game: Game, netGraph: NetGraph): GameMapDTO = GameMapDTO(
@@ -46,6 +46,6 @@ object RestParser {
                 weight = edge.getWeight()
             )
         },
-        gameGoal = game.getGameGoal()
+        gameGoal = game.gameGoal
     )
 }

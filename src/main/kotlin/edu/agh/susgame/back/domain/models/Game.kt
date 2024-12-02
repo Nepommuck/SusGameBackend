@@ -45,8 +45,6 @@ class Game(
         return ((gameLength - (System.currentTimeMillis() - startTime)) / 1000).toInt()
     }
 
-    fun getGameGoal(): Int = gameGoal
-
     fun addPlayer(connection: GamesWebSocketConnection, newPlayer: Player) {
         if (playerMap.values.any { it.name == newPlayer.name }) {
             throw IllegalArgumentException("Player with name $newPlayer.name already exists")
