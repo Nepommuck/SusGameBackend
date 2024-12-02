@@ -41,6 +41,7 @@ sealed class ServerSocketMessage {
         val edges: List<EdgeDTO>,
         val players: List<PlayerDTO>,
         val gameStatus: GameStatus,
+        val timeLeft: Int, // time in seconds left
     ) : ServerSocketMessage()
 
     /**

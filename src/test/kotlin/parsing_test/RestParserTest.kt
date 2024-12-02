@@ -1,5 +1,6 @@
 package net_test.parsing_test
 
+import edu.agh.susgame.back.domain.models.Game
 import edu.agh.susgame.back.domain.net.Edge
 import edu.agh.susgame.back.domain.net.NetGraph
 import edu.agh.susgame.back.domain.net.Player
@@ -21,6 +22,7 @@ class RestParserTest : TestUtils {
     @Test
     fun `parsing net graph to GameMapApiResult`() {
         val graph = NetGraph()
+        val game = Game("name", 0, 4)
 
         // Create graph elements
         val player0 = Player(0, "Player0")
@@ -56,7 +58,7 @@ class RestParserTest : TestUtils {
         graph.addEdge(node2, node3, edge2) // router2 - router1
         graph.addEdge(node3, node4, edge3) // router2 - server
 
-        val result = RestParser.netGraphToGetGameMapDTO(graph)
+        val result = RestParser.netGraphToGetGameMapDTO(game, graph)
 
         assertEquals(result.hosts.size, 1)
         assertContains(result.hosts, HostDTO(id = 0, coordinates = coordinates1, playerId = player0.index))

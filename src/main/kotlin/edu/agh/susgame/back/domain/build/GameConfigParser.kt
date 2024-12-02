@@ -1,4 +1,4 @@
-package edu.agh.susgame.back.domain.net.build
+package edu.agh.susgame.back.domain.build
 
 import edu.agh.susgame.back.domain.net.Edge
 import edu.agh.susgame.back.domain.net.NetGraph
@@ -7,6 +7,8 @@ import edu.agh.susgame.back.domain.net.node.Host
 import edu.agh.susgame.back.domain.net.node.Node
 import edu.agh.susgame.back.domain.net.node.Router
 import edu.agh.susgame.back.domain.net.node.Server
+import edu.agh.susgame.config.GAME_DEFAULT_PACKETS_DELIVERED_GOAL
+import edu.agh.susgame.config.GAME_TIME_DEFAULT
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import java.io.File
@@ -24,9 +26,20 @@ data class Coordinates(
 data class EdgeJson(val weight: Int, val from: Int, val to: Int)
 
 @Serializable
-data class GraphJson(val nodes: List<NodeJson>, val edges: List<EdgeJson>)
+data class GraphJson(
+    val gameTime: Int = GAME_TIME_DEFAULT,
+    val gameGoal: Int = GAME_DEFAULT_PACKETS_DELIVERED_GOAL,
+    val nodes: List<NodeJson>,
+    val edges: List<EdgeJson>
+)
 
-class GraphParser {
+data class GameConfig(
+    val netGraph: NetGraph,
+    val gameLength: Int,
+    val gameGoal: Int,
+)
+
+class GameConfigParser {
     /**
      * Parses a JSON file containing graph data and creates a NetGraph object.
      *
@@ -40,7 +53,7 @@ class GraphParser {
      * @throws IllegalArgumentException If the file cannot be found or read, if there are not
      *                                  enough players for the Host nodes, or if the JSON data is invalid.
      */
-    fun parseFromFile(filePath: String, players: List<Player>): NetGraph {
+    fun parseFromFile(filePath: String, players: List<Player>): GameConfig {
         // This does not work on linux
         //val fileUrl = javaClass.getResource(filePath)
         //    ?: throw IllegalArgumentException("File not found at path: $filePath")
@@ -49,9 +62,9 @@ class GraphParser {
         return parseGraph(jsonString, players)
     }
 
-    private fun parseGraph(jsonString: String, players: List<Player>): NetGraph {
+    private fun parseGraph(jsonString: String, players: List<Player>): GameConfig {
         val json = Json { ignoreUnknownKeys = true }
-        val graphData = json.decodeFromString<GraphJson>(jsonString)
+        val gameData = json.decodeFromString<GraphJson>(jsonString)
 
         val graph = NetGraph()
         val nodeMap = mutableMapOf<Int, Node>() // Map registering nodes under dynamically added indexes.
@@ -64,7 +77,7 @@ class GraphParser {
         // Create Nodes and add to the NetGraph
         // IMPORTANT It is important for UpgradeDTO for each pair of node and edge to different index
         var nodeIndex = 0
-        graphData.nodes.forEachIndexed { _, nodeJson ->
+        gameData.nodes.forEachIndexed { _, nodeJson ->
             val coordinates = Pair(nodeJson.coordinates.x, nodeJson.coordinates.y)
             val node = when (nodeJson.type) {
                 "Host" -> {
@@ -85,7 +98,7 @@ class GraphParser {
 
         // Create Edges and connect Nodes
         var edgeIndex = nodeIndex
-        graphData.edges.forEachIndexed { _, edgeJson ->
+        gameData.edges.forEachIndexed { _, edgeJson ->
             val fromNode = nodeMap[edgeJson.from] ?: throw IllegalArgumentException("Node not found")
             val toNode = nodeMap[edgeJson.to] ?: throw IllegalArgumentException("Node not found")
             val edge = Edge(edgeIndex, edgeJson.weight, connectedNodesIds = Pair(edgeJson.from, edgeJson.to))
@@ -93,6 +106,6 @@ class GraphParser {
             edgeIndex++
         }
 
-        return graph
+        return GameConfig(graph, gameData.gameTime, gameData.gameGoal)
     }
 }

@@ -1,7 +1,7 @@
 package gameplay
 
 import edu.agh.susgame.back.domain.net.Player
-import edu.agh.susgame.back.domain.net.build.GraphParser
+import edu.agh.susgame.back.domain.build.GameConfigParser
 import edu.agh.susgame.config.*
 import org.junit.Test
 import kotlin.math.ceil
@@ -9,15 +9,15 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class UpgradeTest {
-    private val parser = GraphParser()
+    private val parser = GameConfigParser()
 
     @Test
     fun upgradeTest() {
         val player0 = Player(0, "P0")
         val player1 = Player(1, "P1")
-        val filePath = "src/main/resources/graph_files/test/test_upgrade.json"
+        val filePath = "src/main/resources/game_files/test/test_upgrade.json"
         val players = listOf(player0, player1)
-        val graph = parser.parseFromFile(filePath, players)
+        val (graph) = parser.parseFromFile(filePath, players)
 
 
         val edge = graph.getEdges().first()

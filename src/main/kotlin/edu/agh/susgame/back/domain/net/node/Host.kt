@@ -91,7 +91,8 @@ class Host(
             packetRoute = buildList {
                 firstNode?.let { add(it.index) }
                 addAll(nonNullRoute.map { it.index })
-            }
+            },
+            packetsSentPerTick = maxPacketsPerTick
         )
     }
 
