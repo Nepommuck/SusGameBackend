@@ -2,6 +2,7 @@ package edu.agh.susgame.back.services.rest
 
 import edu.agh.susgame.back.domain.models.Game
 import edu.agh.susgame.dto.rest.model.Lobby
+import edu.agh.susgame.dto.socket.common.GameStatus
 import java.util.concurrent.ConcurrentHashMap
 
 class GameStorage(games: List<Game> = emptyList()) {
@@ -21,7 +22,7 @@ class GameStorage(games: List<Game> = emptyList()) {
 
     fun findGameByName(gameName: String): Game? = gameMap.values.find { it.name == gameName }
 
-    fun getReturnableData(): List<Lobby> = gameMap.values.map { it.getDataToReturn() }
+    fun getReturnableData(): List<Lobby> = gameMap.values.filter { it.getGameStatus() == GameStatus.WAITING }.map { it.getDataToReturn() }
 
     fun size(): Int = gameMap.size
 

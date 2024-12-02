@@ -3,7 +3,7 @@ package edu.agh.susgame.back.domain.models
 import edu.agh.susgame.back.domain.net.BFS
 import edu.agh.susgame.back.domain.net.NetGraph
 import edu.agh.susgame.back.domain.net.Player
-import edu.agh.susgame.back.domain.net.build.Generator
+import edu.agh.susgame.back.domain.build.GameInitializer
 import edu.agh.susgame.back.domain.net.node.Host
 import edu.agh.susgame.back.services.rest.RestParser
 import edu.agh.susgame.back.services.socket.GamesWebSocketConnection
@@ -24,8 +24,8 @@ class Game(
     val id: Int,
     val maxNumberOfPlayers: Int,
     val gamePin: String? = null,
-    private val gameLength: Long = GAME_TIME_DEFAULT,
-    private val gameGoal: Int = GAME_DEFAULT_PACKETS_DELIVERED_GOAL,
+
+
 ) {
 
     @Volatile
@@ -35,9 +35,15 @@ class Game(
     private var nextPlayerIdx: AtomicInteger = AtomicInteger(0)
 
     lateinit var netGraph: NetGraph
+    var gameLength: Int = GAME_TIME_DEFAULT
+    var gameGoal: Int = GAME_DEFAULT_PACKETS_DELIVERED_GOAL
     lateinit var bfs: BFS
 
     private var startTime: Long = -1
+
+    fun getTimeLeftInSeconds(): Int {
+        return ((gameLength - (System.currentTimeMillis() - startTime)) / 1000).toInt()
+    }
 
     fun addPlayer(connection: GamesWebSocketConnection, newPlayer: Player) {
         if (playerMap.values.any { it.name == newPlayer.name }) {
@@ -76,8 +82,11 @@ class Game(
     /**
      * Starts the game by generating the graph, setting the start time and changing the game status to running
      */
-    fun startGame(graph: NetGraph? = null) {
-        netGraph = graph ?: Generator.getGraph(playerMap.values.toList())
+    private fun startGame(graph: NetGraph? = null) {
+        val (parsedGraph, gameLength, gameGoal) = GameInitializer.getGameParams(playerMap.values.toList())
+        this.gameGoal = gameGoal
+        this.gameLength = gameLength
+        netGraph = graph ?: parsedGraph
         bfs = BFS(net = netGraph, root = netGraph.getServer())
         gameStatus = GameStatus.RUNNING
         startTime = System.currentTimeMillis()
@@ -299,12 +308,25 @@ class Game(
             } else if (router != null) {
                 router.upgradeBuffer(thisPlayer)
             } else {
-                thisConnection.sendServerSocketMessage(
-                    ServerSocketMessage.ServerError(
-                        "There is neither an edge not a host with id of $deviceIdToUpgrade."
-                    )
-                )
+                sendErrorMessage("There is neither an edge not a host with id of $deviceIdToUpgrade.")
             }
+        } catch (e: IllegalStateException) {
+            thisConnection.sendServerSocketMessage(
+                ServerSocketMessage.ServerError(e.message ?: "Unknown error")
+            )
+        }
+    }
+
+    suspend fun handleFixRouterDTO( thisConnection: GamesWebSocketConnection, receivedMessage: ClientSocketMessage.FixRouterDTO) {
+        if (gameStatus != GameStatus.RUNNING) {
+            sendErrorMessage("Invalid game status on server: Game is not running")
+            return
+        }
+
+        try {
+            val deviceIdToUpgrade = receivedMessage.deviceId
+            val router = netGraph.getRouter(deviceIdToUpgrade)
+            router?.fixBuffer() ?: sendErrorMessage("There is no host with id of $deviceIdToUpgrade")
         } catch (e: IllegalStateException) {
             thisConnection.sendServerSocketMessage(
                 ServerSocketMessage.ServerError(e.message ?: "Unknown error")

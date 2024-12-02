@@ -275,6 +275,22 @@ class RoutingTest : TestUtils {
         assertEquals(router.getOverheatLevel(), 0)
         assertEquals(router.spaceLeft, router.getBufferSize())
     }
+
+    @Test
+    fun `server can collect packets from router after it is fixed`() {
+        //Given
+        val router = mockRouterForOverflowTests()
+
+        // When
+        // CRITICAL_BUFFER_OVERHEAT_LEVEL iterations leading to buffer overflow
+        repeat(CRITICAL_BUFFER_OVERHEAT_LEVEL) {
+            router.collectPackets()
+            router.updateBuffer()
+        }
+
+        // Expect
+        assertFalse(router.isWorking())
+    }
 }
 
 

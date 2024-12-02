@@ -17,9 +17,10 @@ object RestParser {
         edges = game.netGraph.getEdges().map { it.toDTO() },
         players = game.getPlayers().toMap().values.map { it.toDTO() },
         gameStatus = game.getGameStatus(),
+        remainingSeconds = game.getTimeLeftInSeconds(),
     )
 
-    fun netGraphToGetGameMapDTO(netGraph: NetGraph): GameMapDTO = GameMapDTO(
+    fun netGraphToGetGameMapDTO(game: Game, netGraph: NetGraph): GameMapDTO = GameMapDTO(
         server = GameMapServerDTO(
             id = netGraph.getServer().index,
             coordinates = netGraph.getServer().getCoordinates(),

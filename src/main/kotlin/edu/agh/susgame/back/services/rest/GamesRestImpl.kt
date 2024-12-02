@@ -73,7 +73,7 @@ class GamesRestImpl : GamesRest {
         val netGraph = game.netGraph
 
         return@supplyAsync GetGameMapApiResult.Success(
-            gameMap = RestParser.netGraphToGetGameMapDTO(netGraph),
+            gameMap = RestParser.netGraphToGetGameMapDTO(game, netGraph),
         )
     }
 

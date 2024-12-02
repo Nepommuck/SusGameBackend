@@ -132,9 +132,11 @@ class Router(
      *  - Level of overheat decreases to zero.
      */
     fun fixBuffer() {
-        clearBuffer()
-        isWorking = true
-        overheatLevel = 0
+        if (!isWorking) {
+            clearBuffer()
+            isWorking = true
+            overheatLevel = 0
+        }
     }
 
     /**
@@ -162,7 +164,9 @@ class Router(
     }
 
     fun clearBuffer() {
-        buffer.clear()
+        buffer.forEach { (_, inputQueue) ->
+            inputQueue.clear()
+        }
         spaceLeft = bufferSize
     }
 
