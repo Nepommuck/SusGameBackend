@@ -252,7 +252,7 @@ class RoutingTest : TestUtils {
 
         // Expect
         assertTrue(router.isWorking())
-        assertEquals(router.getOverheatLevel(), 0)
+        assertEquals(0, router.getOverheatLevel())
 
     }
 

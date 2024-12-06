@@ -8,7 +8,7 @@ import edu.agh.susgame.config.ROUTER_DEFAULT_UPGRADE_COST
 import edu.agh.susgame.config.nextRouterBufferSize
 import edu.agh.susgame.config.nextRouterUpgradeCost
 import edu.agh.susgame.dto.socket.server.RouterDTO
-import kotlin.math.min
+import kotlin.math.max
 
 /**
  * Represents the router object. Extends Sending.
@@ -78,7 +78,8 @@ class Router(
      * @param node Neighbor to get the packet from.
      * @return The first packet from the queue.
      */
-    override fun getPacket(node: Node): Packet? = if (isWorking) buffer[node]?.removeFirstOrNull()?.also { spaceLeft++ } else null
+    override fun getPacket(node: Node): Packet? =
+        if (isWorking) buffer[node]?.removeFirstOrNull()?.also { spaceLeft++ } else null
 
     /**
      * Retrieves how much space is left in the router buffer
@@ -146,8 +147,9 @@ class Router(
      *  - if the overheat level reaches the criticalBufferOverflow level, the router stops working.
      */
     private fun controlBufferOverheat() {
-        if (spaceLeft == 0) overheatLevel++
-        else overheatLevel = min(overheatLevel--, 0)
+        overheatLevel =
+            if (spaceLeft == 0) overheatLevel + 1
+            else max(overheatLevel - 1, 0)
 
         if (overheatLevel >= CRITICAL_BUFFER_OVERHEAT_LEVEL) isWorking = false // Router stops working until it is fixed
     }
