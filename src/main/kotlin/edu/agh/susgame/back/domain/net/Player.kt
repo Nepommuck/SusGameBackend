@@ -3,6 +3,7 @@ package edu.agh.susgame.back.domain.net
 import edu.agh.susgame.config.MONEY_GAINED_BY_CORRECT_ANSWER
 import edu.agh.susgame.config.MONEY_GAIN_PER_ITERATION
 import edu.agh.susgame.config.PLAYER_BASE_MONEY
+import edu.agh.susgame.dto.common.ColorDTO
 import edu.agh.susgame.dto.rest.model.PlayerId
 import edu.agh.susgame.dto.rest.model.PlayerNickname
 import edu.agh.susgame.dto.rest.model.PlayerREST
@@ -16,12 +17,14 @@ class Player(
     var activeQuestionId: Int = -1
 ) {
 
-    private var color: ULong = 0u
+    private var color: ULong = 123134432324uL
 
     fun toREST(): PlayerREST {
         return PlayerREST(
             nickname = PlayerNickname(name),
             id = PlayerId(index),
+            color = ColorDTO(color.toString()),
+            readiness = isReady,
         )
     }
 

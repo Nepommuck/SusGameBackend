@@ -210,7 +210,7 @@ fun Route.gameRouting() {
                         }
 
                         is ClientSocketMessage.FixRouterDTO -> game.handleFixRouterDTO(thisConnection, receivedMessage)
-                    }
+
                 }
             } catch (e: Exception) {
                 println(e.localizedMessage)

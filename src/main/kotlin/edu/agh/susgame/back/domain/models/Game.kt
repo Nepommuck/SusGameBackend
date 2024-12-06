@@ -1,13 +1,14 @@
 package edu.agh.susgame.back.domain.models
 
+import edu.agh.susgame.back.domain.build.GameInitializer
 import edu.agh.susgame.back.domain.net.BFS
 import edu.agh.susgame.back.domain.net.NetGraph
 import edu.agh.susgame.back.domain.net.Player
-import edu.agh.susgame.back.domain.build.GameInitializer
 import edu.agh.susgame.back.domain.net.node.Host
 import edu.agh.susgame.back.services.rest.RestParser
 import edu.agh.susgame.back.services.socket.GamesWebSocketConnection
 import edu.agh.susgame.config.*
+import edu.agh.susgame.dto.common.ColorDTO
 import edu.agh.susgame.dto.rest.model.Lobby
 import edu.agh.susgame.dto.rest.model.LobbyId
 import edu.agh.susgame.dto.socket.ClientSocketMessage
@@ -26,7 +27,7 @@ class Game(
     val gamePin: String? = null,
 
 
-) {
+    ) {
 
     @Volatile
     private var gameStatus: GameStatus = GameStatus.WAITING
@@ -177,13 +178,16 @@ class Game(
             return
         }
 
-        val color: ULong = receivedMessage.color
+        val color: ULong = receivedMessage.color.decimalRgbaValue.toULong()
         thisPlayer.setColor(color)
         playerMap
             .filter { it.key != thisConnection }
             .forEach { (connection, _) ->
                 connection.sendServerSocketMessage(
-                    ServerSocketMessage.PlayerChangeColor(playerId = thisPlayer.index, color = color)
+                    ServerSocketMessage.PlayerChangeColor(
+                        playerId = thisPlayer.index,
+                        color = ColorDTO(color.toString())
+                    )
                 )
             }
     }
@@ -228,7 +232,12 @@ class Game(
 
         if (areAllPlayersReady()) {
             gameStatus = GameStatus.RUNNING
-            startGame()
+            try {
+                startGame()
+            } catch (e: IllegalArgumentException) {
+                sendErrorMessage(e.message ?: "Unknown error")
+                return
+            }
             notifyAllAboutGameStart()
 
             // GAME IS RUNNING
