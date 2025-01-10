@@ -1,4 +1,6 @@
 {
+  "gameTime": 21001,
+  "gameGoal": 4240,
   "nodes": [
     {
       "type": "Router",

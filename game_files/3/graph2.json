@@ -1,0 +1,144 @@
+{
+    "gameTime": 420001,
+    "gameGoal": 6800,
+    "nodes": [
+        {
+            "type": "Server",
+            "coordinates": {
+                "x": 382,
+                "y": 98
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 20,
+            "coordinates": {
+                "x": 382,
+                "y": 157
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 5,
+            "coordinates": {
+                "x": 290,
+                "y": 225
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 5,
+            "coordinates": {
+                "x": 470,
+                "y": 226
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 15,
+            "coordinates": {
+                "x": 381,
+                "y": 307
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 1,
+            "coordinates": {
+                "x": 160,
+                "y": 113
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 1,
+            "coordinates": {
+                "x": 644,
+                "y": 99
+            }
+        },
+        {
+            "type": "Host",
+            "coordinates": {
+                "x": 196,
+                "y": 459
+            }
+        },
+        {
+            "type": "Host",
+            "coordinates": {
+                "x": 389,
+                "y": 465
+            }
+        },
+        {
+            "type": "Host",
+            "coordinates": {
+                "x": 575,
+                "y": 465
+            }
+        }
+    ],
+    "edges": [
+        {
+            "weight": 10000,
+            "from": 9,
+            "to": 4
+        },
+        {
+            "weight": 10000,
+            "from": 8,
+            "to": 4
+        },
+        {
+            "weight": 10000,
+            "from": 7,
+            "to": 4
+        },
+        {
+            "weight": 10000,
+            "from": 4,
+            "to": 2
+        },
+        {
+            "weight": 10000,
+            "from": 2,
+            "to": 1
+        },
+        {
+            "weight": 10000,
+            "from": 1,
+            "to": 3
+        },
+        {
+            "weight": 10000,
+            "from": 4,
+            "to": 3
+        },
+        {
+            "weight": 10000,
+            "from": 1,
+            "to": 0
+        },
+        {
+            "weight": 10000,
+            "from": 2,
+            "to": 5
+        },
+        {
+            "weight": 10000,
+            "from": 5,
+            "to": 0
+        },
+        {
+            "weight": 10000,
+            "from": 3,
+            "to": 6
+        },
+        {
+            "weight": 10000,
+            "from": 6,
+            "to": 0
+        }
+    ]
+}

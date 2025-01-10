@@ -1,4 +1,6 @@
 {
+  "gameTime": 21001,
+  "gameGoal": 5240,
   "nodes": [
     {
       "type": "Host",

@@ -1,162 +1,170 @@
 {
     "gameTime": 420001,
-    "gameGoal": 7200,
+    "gameGoal": 7020,
     "nodes": [
         {
-            "type": "Server",
-            "coordinates": {
-                "x": 383,
-                "y": 80
-            }
-        },
-        {
             "type": "Router",
-            "bufferSize": 30,
+            "bufferSize": 10,
             "coordinates": {
-                "x": 383,
-                "y": 232
-            }
-        },
-        {
-            "type": "Router",
-            "bufferSize": 5,
-            "coordinates": {
-                "x": 279,
-                "y": 165
-            }
-        },
-        {
-            "type": "Router",
-            "bufferSize": 5,
-            "coordinates": {
-                "x": 479,
-                "y": 161
-            }
-        },
-        {
-            "type": "Router",
-            "bufferSize": 5,
-            "coordinates": {
-                "x": 219,
-                "y": 272
-            }
-        },
-        {
-            "type": "Router",
-            "bufferSize": 5,
-            "coordinates": {
-                "x": 548,
-                "y": 269
-            }
-        },
-        {
-            "type": "Router",
-            "bufferSize": 5,
-            "coordinates": {
-                "x": 386,
-                "y": 361
-            }
-        },
-        {
-            "type": "Router",
-            "bufferSize": 1,
-            "coordinates": {
-                "x": 243,
-                "y": 84
-            }
-        },
-        {
-            "type": "Router",
-            "bufferSize": 1,
-            "coordinates": {
-                "x": 512,
-                "y": 67
+                "x": 382,
+                "y": 72
             }
         },
         {
             "type": "Router",
             "bufferSize": 10,
             "coordinates": {
-                "x": 391,
-                "y": 455
+                "x": 382,
+                "y": 122
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 8,
+            "coordinates": {
+                "x": 317,
+                "y": 168
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 8,
+            "coordinates": {
+                "x": 448,
+                "y": 168
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 15,
+            "coordinates": {
+                "x": 384,
+                "y": 243
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 1,
+            "coordinates": {
+                "x": 385,
+                "y": 312
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 20,
+            "coordinates": {
+                "x": 385,
+                "y": 393
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 5,
+            "coordinates": {
+                "x": 297,
+                "y": 311
+            }
+        },
+        {
+            "type": "Router",
+            "bufferSize": 5,
+            "coordinates": {
+                "x": 466,
+                "y": 315
             }
         },
         {
             "type": "Host",
             "coordinates": {
-                "x": 222,
-                "y": 401
+                "x": 377,
+                "y": 11
             }
         },
         {
             "type": "Host",
             "coordinates": {
-                "x": 389,
-                "y": 547
+                "x": 193,
+                "y": 53
             }
         },
         {
             "type": "Host",
             "coordinates": {
-                "x": 592,
-                "y": 395
+                "x": 554,
+                "y": 71
+            }
+        },
+        {
+            "type": "Server",
+            "coordinates": {
+                "x": 385,
+                "y": 483
             }
         },
         {
             "type": "Host",
             "coordinates": {
-                "x": 660,
-                "y": 185
-            }
-        },
-        {
-            "type": "Host",
-            "coordinates": {
-                "x": 85,
-                "y": 184
+                "x": 382,
+                "y": 168
             }
         }
     ],
     "edges": [
         {
             "weight": 10000,
-            "from": 4,
-            "to": 1
+            "from": 0,
+            "to": 9
         },
         {
             "weight": 10000,
-            "from": 1,
-            "to": 6
-        },
-        {
-            "weight": 10000,
-            "from": 6,
+            "from": 0,
             "to": 2
         },
         {
             "weight": 10000,
-            "from": 2,
-            "to": 0
+            "from": 1,
+            "to": 10
         },
         {
             "weight": 10000,
-            "from": 6,
+            "from": 1,
+            "to": 11
+        },
+        {
+            "weight": 10000,
+            "from": 0,
             "to": 3
         },
         {
             "weight": 10000,
-            "from": 3,
-            "to": 0
-        },
-        {
-            "weight": 10000,
-            "from": 3,
+            "from": 1,
             "to": 2
         },
         {
             "weight": 10000,
             "from": 1,
+            "to": 3
+        },
+        {
+            "weight": 10000,
+            "from": 4,
+            "to": 2
+        },
+        {
+            "weight": 10000,
+            "from": 4,
+            "to": 3
+        },
+        {
+            "weight": 10000,
+            "from": 4,
             "to": 5
+        },
+        {
+            "weight": 10000,
+            "from": 5,
+            "to": 6
         },
         {
             "weight": 10000,
@@ -165,53 +173,33 @@
         },
         {
             "weight": 10000,
-            "from": 7,
-            "to": 3
-        },
-        {
-            "weight": 10000,
-            "from": 5,
+            "from": 4,
             "to": 8
         },
         {
             "weight": 10000,
             "from": 8,
-            "to": 2
+            "to": 6
         },
         {
             "weight": 10000,
-            "from": 9,
-            "to": 5
+            "from": 7,
+            "to": 6
         },
         {
             "weight": 10000,
-            "from": 9,
-            "to": 4
-        },
-        {
-            "weight": 10000,
-            "from": 10,
-            "to": 4
-        },
-        {
-            "weight": 10000,
-            "from": 11,
-            "to": 9
-        },
-        {
-            "weight": 10000,
-            "from": 12,
-            "to": 5
-        },
-        {
-            "weight": 10000,
-            "from": 14,
-            "to": 4
+            "from": 6,
+            "to": 12
         },
         {
             "weight": 10000,
             "from": 13,
-            "to": 5
+            "to": 2
+        },
+        {
+            "weight": 10000,
+            "from": 13,
+            "to": 3
         }
     ]
 }
